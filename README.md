@@ -21,23 +21,14 @@ Each row represents a unique SKU (Stock Keeping Unit) for a product. Duplicate p
 🧾 Columns:
 
 sku_id: Unique identifier for each product entry (Synthetic Primary Key)
-
 name: Product name as it appears on the app
-
 category: Product category like Fruits, Snacks, Beverages, etc.
-
 mrp: Maximum Retail Price (originally in paise, converted to ₹)
-
 discountPercent: Discount applied on MRP
-
 discountedSellingPrice: Final price after discount (also converted to ₹)
-
 availableQuantity: Units available in inventory
-
 weightInGms: Product weight in grams
-
 outOfStock: Boolean flag indicating stock availability
-
 quantity: Number of units per package (mixed with grams for loose produce)
 
 🔧 Project Workflow
@@ -58,48 +49,30 @@ CREATE TABLE zepto (
   outOfStock BOOLEAN,
   quantity INTEGER
 );
+
 2. Data Import
 Loaded CSV using pgAdmin's import feature.
 
-If you're not able to use the import feature, write this code instead:
-
-   \copy zepto(category,name,mrp,discountPercent,availableQuantity,
-            discountedSellingPrice,weightInGms,outOfStock,quantity)
-  FROM 'data/zepto_v2.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', ENCODING 'UTF8');
-Faced encoding issues (UTF-8 error), which were fixed by saving the CSV file using CSV UTF-8 format.
 3. 🔍 Data Exploration
 Counted the total number of records in the dataset
-
 Viewed a sample of the dataset to understand structure and content
-
 Checked for null values across all columns
-
 Identified distinct product categories available in the dataset
-
 Compared in-stock vs out-of-stock product counts
-
 Detected products present multiple times, representing different SKUs
 
 4. 🧹 Data Cleaning
 Identified and removed rows where MRP or discounted selling price was zero
-
 Converted mrp and discountedSellingPrice from paise to rupees for consistency and readability
 
 5. 📊 Business Insights
 Found top 10 best-value products based on discount percentage
-
 Identified high-MRP products that are currently out of stock
-
 Estimated potential revenue for each product category
-
 Filtered expensive products (MRP > ₹500) with minimal discount
-
 Ranked top 5 categories offering highest average discounts
-
 Calculated price per gram to identify value-for-money products
-
 Grouped products based on weight into Low, Medium, and Bulk categories
-
 Measured total inventory weight per product category
 
 
